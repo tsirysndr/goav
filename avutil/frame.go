@@ -195,6 +195,22 @@ func GetBestEffortTimestamp(f *Frame) int64 {
 	return int64(f.best_effort_timestamp)
 }
 
+func Format(f *Frame) int {
+	return int(f.format)
+}
+
+func ChannelLayout(f *Frame) uint64 {
+	return uint64(f.channel_layout)
+}
+
+func SampleRate(f *Frame) int {
+	return int(f.sample_rate)
+}
+
+func NbSamples(f *Frame) int {
+	return int(f.nb_samples)
+}
+
 // //static int get_video_buffer (Frame *frame, int align)
 // func GetVideoBuffer(f *Frame, a int) int {
 // 	return int(C.get_video_buffer(f, C.int(a)))
