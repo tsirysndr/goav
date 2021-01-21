@@ -1,6 +1,6 @@
 package avutil
 
-//cgo pk-config: libavutil
+//cgo pkg-config: libavutil
 //#include <libavutil/samplefmt.h>
 
 import "C"
