@@ -65,3 +65,7 @@ const (
 func AvGetChannelLayoutNbChannels(cl uint64) int {
 	return int(C.av_get_channel_layout_nb_channels((C.uint64_t)(cl)))
 }
+
+func AvGetDefaultChannelLayout(nb_channels int) int {
+	return int(C.av_get_default_channel_layout(C.int(nb_channels)))
+}
