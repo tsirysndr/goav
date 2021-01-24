@@ -201,3 +201,11 @@ func (ctxt *Context) AvcodecSendPacket(packet *Packet) int {
 func (ctxt *Context) AvcodecReceiveFrame(frame *Frame) int {
 	return (int)(C.avcodec_receive_frame((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVFrame)(frame)))
 }
+
+func (cctx *Context) SampleAspectRatioNum() int {
+	return int(cctx.sample_aspect_ratio.num)
+}
+
+func (cctx *Context) SampleAspectRatioDen() int {
+	return int(cctx.sample_aspect_ratio.den)
+}

@@ -148,11 +148,3 @@ func (cctx *CodecContext) Release() {
 	C.avcodec_close((*C.struct_AVCodecContext)(unsafe.Pointer(cctx)))
 	C.av_freep(unsafe.Pointer(cctx))
 }
-
-func (cctx *CodecContext) SampleAspectRatioNum() int {
-	return int(cctx.sample_aspect_ratio.num)
-}
-
-func (cctx *CodecContext) SampleAspectRatioDen() int {
-	return int(cctx.sample_aspect_ratio.den)
-}
