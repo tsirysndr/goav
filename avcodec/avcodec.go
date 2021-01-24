@@ -57,11 +57,6 @@ type (
 	AvSampleFormat                C.enum_AVSampleFormat
 )
 
-const (
-	AV_PIX_FMT_YUVJ420P = C.AV_PIX_FMT_YUVJ420P
-	AV_PIX_FMT_RGB24    = C.AV_PIX_FMT_RGB24
-)
-
 func (cp *AvCodecParameters) AvCodecGetId() CodecId {
 	return *((*CodecId)(unsafe.Pointer(&cp.codec_id)))
 }
