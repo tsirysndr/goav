@@ -36,3 +36,7 @@ func AvSamplesAllocArrayAndSamples(audio_data ***uint8, linesize *int, nb_channe
 func AvGetBytesPerSample(sf AvSampleFormat) int {
 	return int(C.av_get_bytes_per_sample((C.enum_AVSampleFormat)(sf)))
 }
+
+func AvSamplesGetBufferSize(linesize *int, nb_channels int, nb_samples int, sf AvSampleFormat, align int) int {
+	return int(C.av_samples_get_buffer_size((*C.int)(unsafe.Pointer(linesize)), (C.int)(nb_channels), (C.int)(nb_samples), (C.enum_AVSampleFormat)(sf), (C.int)(align)))
+}
