@@ -109,6 +109,10 @@ func Data(f *Frame) (data [8]*uint8) {
 	return
 }
 
+func ExtendedData(f *Frame) **uint8 {
+	return (**uint8)(unsafe.Pointer(f.extended_data))
+}
+
 func Linesize(f *Frame) (linesize [8]int32) {
 	for i := range linesize {
 		linesize[i] = int32(f.linesize[i])
