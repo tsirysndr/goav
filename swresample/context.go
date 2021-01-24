@@ -4,7 +4,8 @@
 package swresample
 
 /*
-	#cgo pkg-config: libswresample
+	#cgo pkg-config: libswresample libavutil
+	#include <libavutil/avutil.h>
 	#include <libswresample/swresample.h>
 */
 import "C"
@@ -38,8 +39,11 @@ func (s *Context) SwrClose() {
 }
 
 //Core conversion functions. Convert audio
-func (s *Context) SwrConvert(out **uint8, oc int, in **uint8, ic int) int {
-	return int(C.swr_convert((*C.struct_SwrContext)(s), (**C.uint8_t)(unsafe.Pointer(out)), C.int(oc), (**C.uint8_t)(unsafe.Pointer(in)), C.int(ic)))
+func (s *Context) SwrConvert(oc int, in **uint8, ic int) (int, **uint8) {
+	resampleBuffer := (*C.uint8_t)(C.av_malloc((C.ulong)(oc * 8)))
+	resampleBufferp := &resampleBuffer
+	n := int(C.swr_convert((*C.struct_SwrContext)(s), resampleBufferp, C.int(oc), (**C.uint8_t)(unsafe.Pointer(in)), C.int(ic)))
+	return n, (**uint8)(unsafe.Pointer(resampleBufferp))
 }
 
 //Convert the next timestamp from input to output timestamps are in 1/(in_sample_rate * out_sample_rate) units.
