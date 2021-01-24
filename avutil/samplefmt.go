@@ -3,6 +3,7 @@ package avutil
 //#cgo pkg-config: libavutil
 //#include <libavutil/samplefmt.h>
 import "C"
+import "unsafe"
 
 type (
 	AvSampleFormat C.enum_AVSampleFormat
@@ -26,4 +27,8 @@ const (
 
 func AvSampleFormatFmtIsPlanar(sf AvSampleFormat) int {
 	return int(C.av_sample_fmt_is_planar((C.enum_AVSampleFormat)(sf)))
+}
+
+func AvSamplesAllocArrayAndSamples(audio_data ***uint8, linesize *int, nb_channels int, nb_samples int, sample_fmt AvSampleFormat, align int) int {
+	return int(C.av_samples_alloc_array_and_samples((***C.uint8_t)(unsafe.Pointer(audio_data)), (*C.int)(unsafe.Pointer(linesize)), (C.int)(nb_channels), (C.int)(nb_samples), (C.enum_AVSampleFormat)(sample_fmt), (C.int)(align)))
 }
