@@ -40,7 +40,7 @@ func (s *Context) SwrClose() {
 
 //Core conversion functions. Convert audio
 func (s *Context) SwrConvert(oc int, in **uint8, ic int) (int, **uint8) {
-	resampleBuffer := (*C.uint8_t)(C.av_malloc((C.uint)(oc * 8)))
+	resampleBuffer := (*C.uint8_t)(C.av_malloc((C.ulong)(oc * 8)))
 	resampleBufferp := &resampleBuffer
 	n := int(C.swr_convert((*C.struct_SwrContext)(s), resampleBufferp, C.int(oc), (**C.uint8_t)(unsafe.Pointer(in)), C.int(ic)))
 	return n, (**uint8)(unsafe.Pointer(resampleBufferp))
